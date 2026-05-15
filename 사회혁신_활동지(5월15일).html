@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔴🔵 빨간 버튼 & 파란 버튼 — 사회실험 활동지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1e2d4a;
+    --navy-light: #2e4470;
+    --red: #c0392b;
+    --red-light: #fdecea;
+    --blue: #1a5276;
+    --blue-light: #eaf2ff;
+    --gray: #f4f5f7;
+    --gray-mid: #e8eaed;
+    --gray-dark: #6b7280;
+    --text: #1a1a2e;
+    --border: #d1d5db;
+    --accent: #f0c040;
+    --white: #ffffff;
+    --success: #16a34a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f0f2f5;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* ── 헤더 ── */
+  .site-header {
+    background: var(--navy);
+    padding: 20px 0 18px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+  .site-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .site-header p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+  }
+
+  /* ── 진행률 ── */
+  .progress-wrap {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: var(--gray-mid);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--navy-light), #5b8dee);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--gray-dark);
+    white-space: nowrap;
+    min-width: 48px;
+    text-align: right;
+  }
+
+  /* ── 메인 ── */
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 16px 0;
+  }
+
+  /* ── 학생 정보 ── */
+  .info-strip {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .info-strip label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .info-strip input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--gray);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .info-strip input:focus {
+    outline: none;
+    border-color: var(--navy-light);
+    background: var(--white);
+  }
+
+  /* ── 파트 카드 ── */
+  .part {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .part-header {
+    background: var(--navy);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .part-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: rgba(255,255,255,0.15);
+    color: var(--white);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .part-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    flex: 1;
+  }
+  .star-tag {
+    font-size: 10px;
+    background: var(--accent);
+    color: var(--navy);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+  .part-body {
+    padding: 20px;
+  }
+
+  /* ── 버튼 선택 ── */
+  .btn-choice {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0 4px;
+  }
+  .btn-choice input[type="radio"] { display: none; }
+  .btn-choice label {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .btn-choice label:hover { border-color: var(--gray-dark); }
+  .btn-choice .red-btn { border-color: #e8b4b0; background: var(--red-light); }
+  .btn-choice .blue-btn { border-color: #a8c8e8; background: var(--blue-light); }
+  .btn-choice input[type="radio"]:checked + .red-btn {
+    border-color: var(--red);
+    background: #fdecea;
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.15);
+  }
+  .btn-choice input[type="radio"]:checked + .blue-btn {
+    border-color: var(--blue);
+    background: #d6eaf8;
+    box-shadow: 0 0 0 3px rgba(26,82,118,0.15);
+  }
+  .btn-choice label .btn-icon { font-size: 26px; }
+  .btn-choice label .btn-label { font-size: 14px; font-weight: 700; }
+  .btn-choice label .btn-desc { font-size: 11px; color: var(--gray-dark); line-height: 1.4; }
+  .red-btn .btn-label { color: var(--red); }
+  .blue-btn .btn-label { color: var(--blue); }
+
+  /* ── 질문 블록 ── */
+  .q-block {
+    margin-bottom: 18px;
+  }
+  .q-block:last-child { margin-bottom: 0; }
+  .q-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.5;
+  }
+  .q-num-badge {
+    font-size: 11px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .q-hint {
+    font-size: 11px;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    background: var(--gray);
+    border-radius: 6px;
+    line-height: 1.5;
+  }
+  .q-hint::before { content: "✦ "; }
+  textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+    background: var(--gray);
+    transition: border-color 0.2s, background 0.2s;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  textarea:focus {
+    outline: none;
+    border-color: var(--navy-light);
+    background: var(--white);
+  }
+  textarea.tall { min-height: 110px; }
+
+  /* ── 2열 메모 ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .col-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .col-card-head {
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .col-card-head.red { background: var(--red-light); color: var(--red); }
+  .col-card-head.blue { background: var(--blue-light); color: var(--blue); }
+  .col-card textarea {
+    border: none;
+    border-radius: 0;
+    background: var(--white);
+    min-height: 90px;
+  }
+  .col-card textarea:focus { background: #fafbff; border: none; }
+
+  /* ── 변화 여부 ── */
+  .change-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .change-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .change-card-head {
+    padding: 9px 12px;
+    background: var(--gray);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  .change-card textarea {
+    border: none;
+    border-radius: 0;
+    background: var(--white);
+    min-height: 90px;
+  }
+
+  /* ── 현실연결 표 ── */
+  .reality-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .reality-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 9px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .reality-table td {
+    border: 1px solid var(--border);
+    vertical-align: top;
+    padding: 0;
+  }
+  .reality-table td textarea {
+    border: none;
+    border-radius: 0;
+    background: var(--white);
+    min-height: 70px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .reality-table tr:nth-child(even) td { background: #fafafa; }
+  .reality-table tr:nth-child(even) td textarea { background: #fafafa; }
+
+  /* ── 성찰 파트 강조 ── */
+  .part.seongchal .part-header { background: #c0392b; }
+
+  /* ── 제출 영역 ── */
+  .submit-area {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .submit-area p {
+    font-size: 13px;
+    color: var(--gray-dark);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .submit-btn {
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 14px 40px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.02em;
+  }
+  .submit-btn:hover { background: var(--navy-light); }
+  .submit-btn:active { transform: scale(0.98); }
+  .submit-btn:disabled { background: var(--gray-dark); cursor: not-allowed; }
+
+  /* ── 완료 화면 ── */
+  .done-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .done-screen .done-icon { font-size: 56px; margin-bottom: 16px; }
+  .done-screen h2 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+  .done-screen p { font-size: 14px; color: var(--gray-dark); line-height: 1.7; }
+
+  /* ── 에러 ── */
+  .error-msg {
+    display: none;
+    background: #fdecea;
+    border: 1px solid #f5c6c6;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--red);
+    margin-top: 12px;
+    text-align: left;
+  }
+
+  /* ── 구분선 ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--gray-mid);
+    margin: 16px 0;
+  }
+
+  @media (max-width: 560px) {
+    .info-strip { grid-template-columns: 1fr; }
+    .btn-choice, .two-col, .change-grid { grid-template-columns: 1fr; }
+    .reality-table th:nth-child(3), .reality-table td:nth-child(3) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>🔴 빨간 버튼 &amp; 파란 버튼 🔵</h1>
+  <p>사회혁신 실험 동아리 — 활동지</p>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+  <span class="progress-label" id="progressLabel">0%</span>
+</div>
+
+<div class="container" id="formContainer">
+
+  <!-- 학생 정보 -->
+  <div class="info-strip">
+    <div>
+      <label for="name">이름</label>
+      <input type="text" id="name" placeholder="홍길동" required>
+    </div>
+    <div>
+      <label for="grade">학년 · 반</label>
+      <input type="text" id="grade" placeholder="2학년 3반">
+    </div>
+    <div>
+      <label for="number">번호</label>
+      <input type="text" id="number" placeholder="15번">
+    </div>
+  </div>
+
+  <!-- PART 1 -->
+  <div class="part">
+    <div class="part-header">
+      <span class="part-num">PART 1</span>
+      <span class="part-title">나의 첫 번째 선택</span>
+    </div>
+    <div class="part-body">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">1</span> 나의 선택은 무엇인가요?</div>
+        <div class="btn-choice">
+          <input type="radio" name="choice1" id="red1" value="빨간 버튼">
+          <label for="red1" class="red-btn">
+            <span class="btn-icon">🔴</span>
+            <span class="btn-label">빨간 버튼</span>
+            <span class="btn-desc">파란 버튼 50% 미만 →<br>빨간 선택자만 생존</span>
+          </label>
+          <input type="radio" name="choice1" id="blue1" value="파란 버튼">
+          <label for="blue1" class="blue-btn">
+            <span class="btn-icon">🔵</span>
+            <span class="btn-label">파란 버튼</span>
+            <span class="btn-desc">파란 버튼 50% 초과 →<br>모두 생존</span>
+          </label>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">2</span> 그 버튼을 선택한 이유를 솔직하게 적어주세요. <span class="star-tag">★ 세특</span></div>
+        <div class="q-hint">게임이론적 계산? 공동체 신뢰? 직관? 어떤 이유든 괜찮아요.</div>
+        <textarea class="tall" id="reason1" placeholder="여기에 적어주세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part">
+    <div class="part-header">
+      <span class="part-num">PART 2</span>
+      <span class="part-title">다른 사람의 이유 듣기</span>
+    </div>
+    <div class="part-body">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">3</span> 발표를 들으면서 인상적인 논리를 메모하세요. <span class="star-tag">★ 세특</span></div>
+        <div class="q-hint">동의하지 않아도 괜찮아요. 논리 자체가 인상적이었던 것을 써주세요.</div>
+        <div class="two-col">
+          <div class="col-card">
+            <div class="col-card-head red">🔴 빨간 버튼 측 논리</div>
+            <textarea id="memo_red" placeholder="인상적인 논리..."></textarea>
+          </div>
+          <div class="col-card">
+            <div class="col-card-head blue">🔵 파란 버튼 측 논리</div>
+            <textarea id="memo_blue" placeholder="인상적인 논리..."></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="part">
+    <div class="part-header">
+      <span class="part-num">PART 3</span>
+      <span class="part-title">토론 — 상대방을 설득하라</span>
+    </div>
+    <div class="part-body">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">4</span> 내가 펼칠 핵심 논리 (최대 2가지) <span class="star-tag">★ 세특</span></div>
+        <div class="q-hint">단순히 '좋다/나쁘다'가 아니라, 왜 합리적인 선택인지 구조적으로 설명해보세요.</div>
+        <textarea class="tall" id="logic" placeholder="여기에 적어주세요..."></textarea>
+      </div>
+      <hr class="divider">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">5</span> 상대방이 반박할 것 같은 논리 (예상 반론) <span class="star-tag">★ 세특</span></div>
+        <textarea id="counter" placeholder="상대가 어떻게 반박할 것 같나요?"></textarea>
+      </div>
+      <hr class="divider">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">6</span> 그 반론에 대한 나의 재반박 <span class="star-tag">★ 세특</span></div>
+        <textarea id="rebuttal" placeholder="어떻게 다시 반박하겠나요?"></textarea>
+      </div>
+      <hr class="divider">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">7</span> 토론 중 가장 설득력 있다고 느낀 상대방의 논리는? <span class="star-tag">★ 세특</span></div>
+        <div class="q-hint">내 의견이 바뀌지 않더라도, 상대의 논리 중 인정할 수 있는 부분을 솔직하게 적으세요.</div>
+        <textarea id="impressive" placeholder="여기에 적어주세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part">
+    <div class="part-header">
+      <span class="part-num">PART 4</span>
+      <span class="part-title">토론 후 — 나의 선택은?</span>
+    </div>
+    <div class="part-body">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">8</span> 토론이 끝난 후 다시 선택해보세요.</div>
+        <div class="btn-choice">
+          <input type="radio" name="choice2" id="red2" value="빨간 버튼">
+          <label for="red2" class="red-btn">
+            <span class="btn-icon">🔴</span>
+            <span class="btn-label">빨간 버튼</span>
+          </label>
+          <input type="radio" name="choice2" id="blue2" value="파란 버튼">
+          <label for="blue2" class="blue-btn">
+            <span class="btn-icon">🔵</span>
+            <span class="btn-label">파란 버튼</span>
+          </label>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="change-grid">
+        <div class="change-card">
+          <div class="change-card-head">선택이 바뀌었다면?</div>
+          <textarea id="changed" placeholder="어떤 논리나 말이 나를 바꿨나요?"></textarea>
+        </div>
+        <div class="change-card">
+          <div class="change-card-head">선택이 그대로라면?</div>
+          <textarea id="unchanged" placeholder="더 확신하게 된 이유는?"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 5 -->
+  <div class="part">
+    <div class="part-header">
+      <span class="part-num">PART 5</span>
+      <span class="part-title">현실 연결 — 이 실험과 닮은 사회 문제</span>
+    </div>
+    <div class="part-body">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">9</span> 이 실험의 구조와 닮은 현실 문제를 찾아 표를 채워주세요. <span class="star-tag">★ 세특</span></div>
+        <div class="q-hint">개인의 합리적 선택이 집단 전체에 나쁜 결과를 낳는 구조를 생각해보세요.</div>
+        <table class="reality-table">
+          <thead>
+            <tr>
+              <th style="width:22%">현실 문제</th>
+              <th style="width:40%">이 실험과 닮은 점</th>
+              <th style="width:38%">해결 아이디어</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><textarea id="real1_issue" placeholder="예: 투표율 저하"></textarea></td>
+              <td><textarea id="real1_sim" placeholder="닮은 점..."></textarea></td>
+              <td><textarea id="real1_idea" placeholder="아이디어..."></textarea></td>
+            </tr>
+            <tr>
+              <td><textarea id="real2_issue" placeholder="예: 헌혈 부족"></textarea></td>
+              <td><textarea id="real2_sim" placeholder="닮은 점..."></textarea></td>
+              <td><textarea id="real2_idea" placeholder="아이디어..."></textarea></td>
+            </tr>
+            <tr>
+              <td><textarea id="real3_issue" placeholder="자유롭게..."></textarea></td>
+              <td><textarea id="real3_sim" placeholder="닮은 점..."></textarea></td>
+              <td><textarea id="real3_idea" placeholder="아이디어..."></textarea></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 6 성찰 -->
+  <div class="part seongchal">
+    <div class="part-header">
+      <span class="part-num">PART 6</span>
+      <span class="part-title">성찰 카드</span>
+      <span class="star-tag">★ 세특 핵심</span>
+    </div>
+    <div class="part-body">
+      <div class="q-hint" style="margin-bottom:16px;">아래 세 문항은 세부능력 및 특기사항(세특) 작성의 개별화 자료로 활용됩니다. 구체적이고 솔직하게 작성할수록 좋아요.</div>
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">10</span> 오늘 활동에서 내가 가장 많이 발휘한 역량과 그 구체적인 근거를 써주세요. <span class="star-tag">★ 세특</span></div>
+        <div class="q-hint">논리력? 경청? 설득? 비판적 사고? 공감? 어떤 장면에서 그 역량이 드러났나요?</div>
+        <textarea class="tall" id="competency" placeholder="여기에 적어주세요..."></textarea>
+      </div>
+      <hr class="divider">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">11</span> 토론 전과 후, 나의 생각이 어떻게 달라졌나요? (또는 왜 달라지지 않았나요?) <span class="star-tag">★ 세특</span></div>
+        <div class="q-hint">바뀌지 않은 것도 훌륭한 답입니다. 왜 확신이 더 강해졌는지도 좋은 성찰이에요.</div>
+        <textarea class="tall" id="change_reflection" placeholder="여기에 적어주세요..."></textarea>
+      </div>
+      <hr class="divider">
+      <div class="q-block">
+        <div class="q-label"><span class="q-num-badge">12</span> 이 실험이 앞으로 내가 사회 문제를 바라보는 시각에 어떤 영향을 줄 것 같나요? <span class="star-tag">★ 세특</span></div>
+        <div class="q-hint">다음 시간에 직접 사회실험을 설계한다면 어떤 주제로 해보고 싶은지도 써도 좋아요.</div>
+        <textarea class="tall" id="perspective" placeholder="여기에 적어주세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 제출 -->
+  <div class="submit-area">
+    <p>모든 항목을 작성했으면 아래 버튼을 눌러 제출해주세요.<br>제출 후에는 수정이 어려우니 한 번 더 확인해보세요.</p>
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">활동지 제출하기 →</button>
+    <div class="error-msg" id="errorMsg"></div>
+  </div>
+
+  <!-- 완료 화면 -->
+  <div class="done-screen" id="doneScreen">
+    <div class="done-icon">✅</div>
+    <h2>제출 완료!</h2>
+    <p>활동지가 선생님께 전달되었어요.<br>오늘 토론에서 고생 많았어요 :)</p>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  // ★ 여기에 앱스크립트 배포 URL을 붙여넣으세요
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKqxK77feffaWOnFqA59ksXmwH5ANLrt8SNDOHAOswX8l1Jec493xAgKp-RGpcOZlQkg/exec";
+
+  // 진행률 업데이트
+  const requiredIds = ['name','reason1','logic','counter','rebuttal','impressive','competency','change_reflection','perspective'];
+  function updateProgress() {
+    let filled = 0;
+    requiredIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value.trim().length > 2) filled++;
+    });
+    const choice1 = document.querySelector('input[name="choice1"]:checked');
+    const choice2 = document.querySelector('input[name="choice2"]:checked');
+    if (choice1) filled++;
+    if (choice2) filled++;
+    const total = requiredIds.length + 2;
+    const pct = Math.round((filled / total) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = pct + '%';
+  }
+  document.querySelectorAll('textarea, input[type="text"]').forEach(el => el.addEventListener('input', updateProgress));
+  document.querySelectorAll('input[type="radio"]').forEach(el => el.addEventListener('change', updateProgress));
+
+  // 제출
+  function submitForm() {
+    const name = document.getElementById('name').value.trim();
+    if (!name) { showError("이름을 입력해주세요."); return; }
+    const choice1 = document.querySelector('input[name="choice1"]:checked');
+    if (!choice1) { showError("PART 1에서 버튼을 선택해주세요."); return; }
+    const reason1 = document.getElementById('reason1').value.trim();
+    if (!reason1) { showError("PART 1 선택 이유를 작성해주세요."); return; }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = "제출 중...";
+
+    const choice2el = document.querySelector('input[name="choice2"]:checked');
+
+    const data = {
+      이름: name,
+      학년반: document.getElementById('grade').value.trim(),
+      번호: document.getElementById('number').value.trim(),
+      첫선택: choice1.value,
+      선택이유: reason1,
+      빨강측논리메모: document.getElementById('memo_red').value.trim(),
+      파랑측논리메모: document.getElementById('memo_blue').value.trim(),
+      핵심논리: document.getElementById('logic').value.trim(),
+      예상반론: document.getElementById('counter').value.trim(),
+      재반박: document.getElementById('rebuttal').value.trim(),
+      인상적논리: document.getElementById('impressive').value.trim(),
+      토론후선택: choice2el ? choice2el.value : "",
+      선택바뀐이유: document.getElementById('changed').value.trim(),
+      선택유지이유: document.getElementById('unchanged').value.trim(),
+      현실문제1: document.getElementById('real1_issue').value.trim(),
+      현실문제1닮은점: document.getElementById('real1_sim').value.trim(),
+      현실문제1아이디어: document.getElementById('real1_idea').value.trim(),
+      현실문제2: document.getElementById('real2_issue').value.trim(),
+      현실문제2닮은점: document.getElementById('real2_sim').value.trim(),
+      현실문제2아이디어: document.getElementById('real2_idea').value.trim(),
+      현실문제3: document.getElementById('real3_issue').value.trim(),
+      현실문제3닮은점: document.getElementById('real3_sim').value.trim(),
+      현실문제3아이디어: document.getElementById('real3_idea').value.trim(),
+      역량성찰: document.getElementById('competency').value.trim(),
+      생각변화성찰: document.getElementById('change_reflection').value.trim(),
+      사회문제시각: document.getElementById('perspective').value.trim(),
+      제출시각: new Date().toLocaleString('ko-KR')
+    };
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }).then(() => {
+      document.getElementById('formContainer').style.display = 'none';
+      document.getElementById('doneScreen').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }).catch(() => {
+      showError("제출 중 오류가 발생했어요. 인터넷 연결을 확인하거나 선생님께 문의해주세요.");
+      btn.disabled = false;
+      btn.textContent = "활동지 제출하기 →";
+    });
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errorMsg');
+    el.textContent = "⚠ " + msg;
+    el.style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>
