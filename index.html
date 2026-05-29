@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사회혁신 실험 설계 활동지</title>
+  <style>
+    :root {
+      --main: #1f3a5f;
+      --sub: #3f6f9f;
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --line: #d9e0e7;
+      --warn: #fff6d8;
+      --text: #222;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--main), var(--sub));
+      color: white;
+      border-radius: 18px;
+      padding: 28px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 1.9rem;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin: 0;
+      opacity: 0.95;
+      font-size: 1.05rem;
+    }
+
+    .notice {
+      background: var(--warn);
+      border-left: 7px solid #f0b429;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-size: 0.96rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      color: var(--main);
+      border-left: 7px solid var(--main);
+      padding-left: 11px;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .guide {
+      background: #eef4fb;
+      border: 1px solid #d7e6f5;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.94rem;
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-top: 15px;
+      margin-bottom: 6px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #c9d2dc;
+      border-radius: 9px;
+      padding: 11px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: white;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .long {
+      min-height: 130px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    .three {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .checkbox-item {
+      background: #f0f3f7;
+      padding: 10px;
+      border-radius: 9px;
+      font-weight: 500;
+      border: 1px solid #e0e5ea;
+    }
+
+    .checkbox-item input {
+      width: auto;
+      margin-right: 7px;
+    }
+
+    .mini-title {
+      font-weight: 800;
+      color: var(--main);
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .example {
+      color: #555;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 1.08rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .submit-btn {
+      background: var(--main);
+      color: white;
+    }
+
+    .submit-btn:hover {
+      background: #152a45;
+    }
+
+    .secondary-btn {
+      background: #777;
+      color: white;
+    }
+
+    .secondary-btn:hover {
+      background: #555;
+    }
+
+    .save-status {
+      text-align: center;
+      color: #666;
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+
+    .required {
+      color: #c0392b;
+    }
+
+    @media (max-width: 680px) {
+      .row, .three, .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>사회혁신 실험 설계 활동지</h1>
+      <p class="subtitle">나의 진로 분야에서 발견한 사회문제를 분석하고, 작은 실험으로 해결 방안을 설계하기</p>
+    </header>
+
+    <div class="notice">
+      <strong>안내</strong><br>
+      이 활동지는 자동 임시저장됩니다. 새로고침을 해도 작성한 내용이 브라우저에 남아 있습니다.
+      단, 같은 기기와 같은 브라우저에서만 유지됩니다.
+    </div>
+
+    <form id="worksheetForm">
+
+      <div class="card">
+        <h2>기본 정보</h2>
+        <div class="row">
+          <div>
+            <label for="studentId">학번 <span class="required">*</span></label>
+            <input type="text" id="studentId" name="studentId" placeholder="예: 30115" required />
+          </div>
+          <div>
+            <label for="name">이름 <span class="required">*</span></label>
+            <input type="text" id="name" name="name" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>1단계. 진로 기반 사회문제 발견</h2>
+        <div class="guide">
+          단순히 “불편하다”가 아니라, 내가 관심 있는 진로·전공 분야와 연결되는 사회문제를 찾아봅니다.
+        </div>
+
+        <label for="careerField">나의 관심 진로 또는 전공 분야</label>
+        <input type="text" id="careerField" name="careerField" placeholder="예: 간호, 경찰행정, 컴퓨터공학, 경영, 교육, 건축, 환경, 심리, 디자인 등" />
+
+        <label for="socialProblem">그 분야와 관련하여 해결이 필요하다고 생각하는 사회문제</label>
+        <textarea id="socialProblem" name="socialProblem" placeholder="예: 고령층의 복약 관리 어려움, 청소년 사이버 범죄 예방, 무인점포 이용 불편, 학습 격차 등"></textarea>
+
+        <label for="problemImportance">이 문제가 사회적으로 중요한 이유</label>
+        <textarea id="problemImportance" name="problemImportance" placeholder="개인의 불편을 넘어, 왜 사회 전체가 함께 고민해야 하는 문제인지 적어보세요."></textarea>
+
+        <label>이 문제와 관련된 사회적 가치</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="socialValues" value="형평성" />형평성</label>
+          <label class="checkbox-item"><input type="checkbox" name="socialValues" value="안전" />안전</label>
+          <label class="checkbox-item"><input type="checkbox" name="socialValues" value="접근성" />접근성</label>
+          <label class="checkbox-item"><input type="checkbox" name="socialValues" value="지속가능성" />지속가능성</label>
+          <label class="checkbox-item"><input type="checkbox" name="socialValues" value="인권" />인권</label>
+          <label class="checkbox-item"><input type="checkbox" name="socialValues" value="효율성" />효율성</label>
+          <label class="checkbox-item"><input type="checkbox" name="socialValues" value="공동체성" />공동체성</label>
+          <label class="checkbox-item"><input type="checkbox" name="socialValues" value="기타" />기타</label>
+        </div>
+
+        <label for="affectedGroup">가장 큰 영향을 받는 집단</label>
+        <input type="text" id="affectedGroup" name="affectedGroup" placeholder="예: 고령층, 청소년, 장애인, 저소득층, 지역 주민, 학생, 소상공인 등" />
+      </div>
+
+      <div class="card">
+        <h2>2단계. 문제 구조 분석</h2>
+        <div class="guide">
+          사회문제는 겉으로 보이는 원인과 구조적 원인이 다를 수 있습니다. 표면적 원인과 구조적 원인을 구분해 봅니다.
+        </div>
+
+        <label for="directCause">직접 원인: 눈에 보이는 원인</label>
+        <textarea id="directCause" name="directCause" placeholder="예: 안내문이 어렵다, 비용이 비싸다, 정보가 부족하다, 접근 경로가 복잡하다 등"></textarea>
+
+        <label for="structuralCause">구조적 원인: 제도·환경·문화·기술·비용 등 더 깊은 원인</label>
+        <textarea id="structuralCause" name="structuralCause" placeholder="예: 디지털 교육 기회 부족, 정책 지원 미흡, 수익성 중심의 서비스 설계, 사회적 관심 부족 등"></textarea>
+
+        <div class="mini-title">이해관계자 분석</div>
+        <div class="three">
+          <div>
+            <label for="victim">피해자 또는 불편을 겪는 사람</label>
+            <input type="text" id="victim" name="victim" />
+          </div>
+          <div>
+            <label for="responsibleActor">해결 책임이 있는 주체</label>
+            <input type="text" id="responsibleActor" name="responsibleActor" placeholder="예: 지자체, 학교, 기업, 정부 등" />
+          </div>
+          <div>
+            <label for="partner">협력할 수 있는 주체</label>
+            <input type="text" id="partner" name="partner" placeholder="예: 동아리, 지역기관, 앱 개발자, 봉사단체 등" />
+          </div>
+        </div>
+
+        <label for="conflictPoint">이 문제를 둘러싼 갈등이나 충돌 지점</label>
+        <textarea id="conflictPoint" name="conflictPoint" placeholder="예: 비용 부담, 사생활 침해 우려, 편리함과 안전의 충돌, 기업 이익과 공공성의 충돌 등"></textarea>
+      </div>
+
+      <div class="card">
+        <h2>3단계. 기존 해결 방식과 한계 분석</h2>
+        <div class="guide">
+          실제 검색을 해도 좋고, 검색이 어렵다면 현재 사회에서 시도할 법한 해결 방식을 추론해도 됩니다.
+        </div>
+
+        <label for="existingSolution">현재 이 문제를 해결하기 위해 사용되고 있는 방식 또는 떠올릴 수 있는 해결 방식</label>
+        <textarea id="existingSolution" name="existingSolution"></textarea>
+
+        <label for="solutionLimit">그 방식의 한계</label>
+        <textarea id="solutionLimit" name="solutionLimit" placeholder="왜 아직 충분히 해결되지 않았는지 적어보세요."></textarea>
+
+        <label for="unresolvedReason">이 문제가 계속 반복되는 근본 이유</label>
+        <textarea id="unresolvedReason" name="unresolvedReason"></textarea>
+      </div>
+
+      <div class="card">
+        <h2>4단계. 사회혁신 실험 설계</h2>
+        <div class="guide">
+          거창한 정책이 아니라, 학교·가정·지역사회에서 작게 검증할 수 있는 실험을 설계합니다.
+        </div>
+
+        <label for="experimentTitle">실험 이름</label>
+        <input type="text" id="experimentTitle" name="experimentTitle" placeholder="예: 고령층 키오스크 안내문 개선 실험" />
+
+        <div class="row">
+          <div>
+            <label for="experimentTarget">실험 대상</label>
+            <input type="text" id="experimentTarget" name="experimentTarget" placeholder="예: 가족 중 50대 이상 성인 3명" />
+          </div>
+          <div>
+            <label for="experimentPlace">실험 장소</label>
+            <input type="text" id="experimentPlace" name="experimentPlace" placeholder="예: 학교, 집, 동네 상가, 온라인 설문 등" />
+          </div>
+        </div>
+
+        <label for="experimentMethod">실험 방법</label>
+        <textarea class="long" id="experimentMethod" name="experimentMethod" placeholder="누구에게, 무엇을, 어떤 순서로 해 볼 것인지 구체적으로 적어보세요."></textarea>
+
+        <label for="experimentMaterials">필요한 준비물</label>
+        <textarea id="experimentMaterials" name="experimentMaterials" placeholder="예: 설문지, 안내문, 비교 화면, 체크리스트, 스마트폰, 포스터 등"></textarea>
+
+        <label for="measurementIndex">측정할 지표</label>
+        <textarea id="measurementIndex" name="measurementIndex" placeholder="예: 완료 시간, 만족도, 오류 횟수, 도움 요청 횟수, 참여율, 전후 인식 변화 등"></textarea>
+
+        <div class="row">
+          <div>
+            <label for="expectedResult">예상 결과</label>
+            <textarea id="expectedResult" name="expectedResult"></textarea>
+          </div>
+          <div>
+            <label for="failureRisk">실패 가능성 또는 예상 문제</label>
+            <textarea id="failureRisk" name="failureRisk"></textarea>
+          </div>
+        </div>
+
+        <label for="ethicalConcern">윤리적 주의점</label>
+        <textarea id="ethicalConcern" name="ethicalConcern" placeholder="예: 개인정보 보호, 특정 집단에 대한 편견 방지, 강제 참여 금지, 안전 문제 등"></textarea>
+      </div>
+
+      <div class="card">
+        <h2>5단계. 사회적 효과와 보완책</h2>
+
+        <label for="individualEffect">개인에게 미치는 긍정적 효과</label>
+        <textarea id="individualEffect" name="individualEffect"></textarea>
+
+        <label for="communityEffect">학교·지역사회에 미치는 긍정적 효과</label>
+        <textarea id="communityEffect" name="communityEffect"></textarea>
+
+        <label for="socialEffect">사회 전체에 미치는 긍정적 효과</label>
+        <textarea id="socialEffect" name="socialEffect"></textarea>
+
+        <label for="sideEffect">예상되는 부작용 또는 반대 의견</label>
+        <textarea id="sideEffect" name="sideEffect"></textarea>
+
+        <label for="supplementPlan">그 부작용을 줄이기 위한 보완책</label>
+        <textarea id="supplementPlan" name="supplementPlan"></textarea>
+      </div>
+
+      <div class="card">
+        <h2>6단계. 발표용 요약</h2>
+
+        <label for="oneSentence">내 아이디어를 한 문장으로 표현하면?</label>
+        <input type="text" id="oneSentence" name="oneSentence" placeholder="예: 고령층도 쉽게 사용할 수 있는 무인주문 안내 실험" />
+
+        <label for="pitch">30초 발표문</label>
+        <textarea class="long" id="pitch" name="pitch" placeholder="문제 상황 → 왜 중요한가 → 내가 설계한 실험 → 기대 효과 순서로 짧게 정리하세요."></textarea>
+      </div>
+
+      <div class="card">
+        <h2>7단계. 세특용 성찰</h2>
+
+        <label for="careerConnection">이 문제를 선택한 이유와 나의 진로와의 관련성</label>
+        <textarea id="careerConnection" name="careerConnection"></textarea>
+
+        <label for="newInsight">문제를 분석하면서 새롭게 알게 된 사회 구조</label>
+        <textarea id="newInsight" name="newInsight"></textarea>
+
+        <label for="creativePoint">내가 설계한 실험의 창의적인 점</label>
+        <textarea id="creativePoint" name="creativePoint"></textarea>
+
+        <label>이번 활동에서 내가 발휘한 역량</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="competencies" value="문제 발견 능력" />문제 발견 능력</label>
+          <label class="checkbox-item"><input type="checkbox" name="competencies" value="구조적 분석력" />구조적 분석력</label>
+          <label class="checkbox-item"><input type="checkbox" name="competencies" value="창의적 문제 해결력" />창의적 문제 해결력</label>
+          <label class="checkbox-item"><input type="checkbox" name="competencies" value="공감 능력" />공감 능력</label>
+          <label class="checkbox-item"><input type="checkbox" name="competencies" value="진로 연계 탐구력" />진로 연계 탐구력</label>
+          <label class="checkbox-item"><input type="checkbox" name="competencies" value="실험 설계 능력" />실험 설계 능력</label>
+          <label class="checkbox-item"><input type="checkbox" name="competencies" value="윤리적 사고" />윤리적 사고</label>
+          <label class="checkbox-item"><input type="checkbox" name="competencies" value="의사소통 능력" />의사소통 능력</label>
+        </div>
+
+        <label for="followUp">후속 활동으로 실제 실행해 보고 싶은 내용</label>
+        <textarea id="followUp" name="followUp"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">제출하기</button>
+      <button type="button" class="secondary-btn" onclick="clearSavedData()">임시저장 내용 삭제하기</button>
+      <div class="save-status" id="saveStatus">작성 내용 자동 저장 중</div>
+    </form>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "여기에_구글_앱스스크립트_웹앱_URL을_넣으세요";
+    const STORAGE_KEY = "social_innovation_advanced_worksheet_v1";
+
+    const form = document.getElementById("worksheetForm");
+    const saveStatus = document.getElementById("saveStatus");
+
+    function getCheckedValues(name) {
+      return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value);
+    }
+
+    function getFormData() {
+      const data = {};
+
+      form.querySelectorAll("input, textarea, select").forEach(field => {
+        if (field.type === "checkbox") return;
+        data[field.name] = field.value;
+      });
+
+      data.socialValues = getCheckedValues("socialValues").join(", ");
+      data.competencies = getCheckedValues("competencies").join(", ");
+      data.action = "career_social_innovation";
+
+      return data;
+    }
+
+    function getCheckData() {
+      return {
+        socialValues: getCheckedValues("socialValues"),
+        competencies: getCheckedValues("competencies")
+      };
+    }
+
+    function saveToLocalStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(getFormData()));
+      localStorage.setItem(STORAGE_KEY + "_checks", JSON.stringify(getCheckData()));
+
+      saveStatus.textContent = "임시저장 완료";
+
+      setTimeout(() => {
+        saveStatus.textContent = "작성 내용 자동 저장 중";
+      }, 1200);
+    }
+
+    function loadFromLocalStorage() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const savedChecks = localStorage.getItem(STORAGE_KEY + "_checks");
+
+      if (saved) {
+        const data = JSON.parse(saved);
+        Object.keys(data).forEach(key => {
+          const field = form.querySelector(`[name="${key}"]`);
+          if (field && field.type !== "checkbox") {
+            field.value = data[key];
+          }
+        });
+      }
+
+      if (savedChecks) {
+        const checks = JSON.parse(savedChecks);
+
+        Object.keys(checks).forEach(groupName => {
+          checks[groupName].forEach(value => {
+            const checkbox = form.querySelector(`input[name="${groupName}"][value="${value}"]`);
+            if (checkbox) checkbox.checked = true;
+          });
+        });
+      }
+    }
+
+    function clearSavedData() {
+      if (!confirm("현재 브라우저에 임시저장된 내용을 삭제할까요?")) return;
+
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(STORAGE_KEY + "_checks");
+
+      form.reset();
+      saveStatus.textContent = "임시저장 내용이 삭제되었습니다.";
+    }
+
+    form.addEventListener("input", saveToLocalStorage);
+    form.addEventListener("change", saveToLocalStorage);
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      if (SCRIPT_URL.includes("여기에_구글")) {
+        alert("미리보기 상태입니다. Apps Script URL을 넣으면 실제 제출이 가능합니다.");
+        return;
+      }
+
+      const data = getFormData();
+
+      if (!data.studentId.trim() || !data.name.trim()) {
+        alert("학번과 이름을 입력하세요.");
+        return;
+      }
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(data)
+        });
+
+        alert("제출되었습니다. 수고했습니다!");
+      } catch (error) {
+        alert("제출 중 오류가 발생했습니다. 인터넷 연결을 확인하거나 선생님께 알려주세요.");
+      }
+    });
+
+    loadFromLocalStorage();
+  </script>
+</body>
+</html>
