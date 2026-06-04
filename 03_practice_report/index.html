@@ -1,1 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사회혁신 실천 보고서</title>
+  <style>
+    :root {
+      --main: #1f3a5f;
+      --sub: #3f6f9f;
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --notice: #fff6d8;
+      --text: #222;
+      --muted: #666;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .container { max-width: 880px; margin: 0 auto; padding: 22px; }
+    header {
+      background: linear-gradient(135deg, var(--main), var(--sub));
+      color: #fff;
+      border-radius: 18px;
+      padding: 30px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 1.9rem; }
+    .subtitle { margin: 0; opacity: 0.95; font-size: 1.05rem; }
+    .notice {
+      background: var(--notice);
+      border-left: 7px solid #f0b429;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-size: 0.96rem;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    h2 {
+      font-size: 1.22rem;
+      color: var(--main);
+      border-left: 7px solid var(--main);
+      padding-left: 11px;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    .guide {
+      background: #eef4fb;
+      border: 1px solid #d7e6f5;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.94rem;
+      color: #334;
+      margin-bottom: 12px;
+    }
+    label { display: block; font-weight: 700; margin-top: 15px; margin-bottom: 6px; }
+    input, textarea {
+      width: 100%;
+      border: 1px solid #c9d2dc;
+      border-radius: 9px;
+      padding: 11px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: white;
+    }
+    textarea { min-height: 105px; resize: vertical; }
+    textarea.long { min-height: 150px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .example { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+    .section-note { color: var(--muted); font-size: 0.92rem; margin-top: -4px; margin-bottom: 8px; }
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 1.08rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .submit-btn { background: var(--main); color: white; }
+    .submit-btn:hover { background: #152a45; }
+    .secondary-btn { background: #777; color: white; }
+    .secondary-btn:hover { background: #555; }
+    .save-status {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+    .required { color: #c0392b; }
+    @media (max-width: 680px) {
+      .row { grid-template-columns: 1fr; }
+      .container { padding: 14px; }
+      h1 { font-size: 1.55rem; }
+      .card { padding: 18px; }
+    }
+  </style>
+</head>
 
+<body>
+  <div class="container">
+    <header>
+      <h1>사회혁신 실천 보고서</h1>
+      <p class="subtitle">지난 시간에 계획한 후속활동을 실제로 실천하고, 결과와 한계를 성찰하기</p>
+    </header>
+
+    <div class="notice">
+      <strong>안내</strong><br>
+      규모가 큰 활동을 해야 하는 것은 아닙니다. 설문 3명, 기사 2개 분석, 카드뉴스 1장 제작, 가족 대상 실험, 간단한 디자인 구상처럼
+      <strong>작게라도 실제로 해 본 내용</strong>을 구체적으로 작성하세요.
+      <br><br>
+      이 활동지는 자동 임시저장됩니다. 새로고침을 해도 작성한 내용이 브라우저에 남아 있습니다.
+    </div>
+
+    <form id="worksheetForm">
+      <div class="card">
+        <h2>기본 정보</h2>
+        <div class="row">
+          <div>
+            <label for="studentId">학번 <span class="required">*</span></label>
+            <input type="text" id="studentId" name="studentId" placeholder="예: 30115" required />
+          </div>
+          <div>
+            <label for="name">이름 <span class="required">*</span></label>
+            <input type="text" id="name" name="name" required />
+          </div>
+        </div>
+        <label for="topic">주제</label>
+        <input type="text" id="topic" name="topic" placeholder="예: 저작권 인식 개선 캠페인, 점자 화장품 패키지 조사, 사이버 범죄 예방 설문 등" />
+      </div>
+
+      <div class="card">
+        <h2>1. 내가 계획했던 후속활동</h2>
+        <div class="guide">지난 활동지에 적었던 “해 보고 싶은 후속활동”을 바탕으로 작성하세요. 그대로 옮겨 적어도 되고, 조금 수정해도 됩니다.</div>
+        <label for="plannedActivity">지난 시간에 내가 실천해 보고 싶다고 계획했던 활동</label>
+        <textarea id="plannedActivity" name="plannedActivity" class="long" placeholder="지난 시간에 적었던 후속활동을 요약해서 적으세요."></textarea>
+      </div>
+
+      <div class="card">
+        <h2>2. 실제로 해 본 내용</h2>
+        <div class="guide">가장 중요한 부분입니다. 생각만 한 것이 아니라, 실제로 한 행동을 구체적으로 적으세요.</div>
+        <label for="actualPractice">내가 실제로 해 본 일</label>
+        <textarea id="actualPractice" name="actualPractice" class="long" placeholder="예: 친구 5명에게 설문을 했다 / 관련 기사 3개를 찾아 비교했다 / 카드뉴스 초안을 만들었다 / 가족에게 직접 적용해 보았다 / 제품 사례를 조사했다 등"></textarea>
+        <p class="example">작성 예시: “점자 표기가 있는 화장품 브랜드 3곳을 찾아 제품 사진과 표기 방식을 비교하였다. 이후 친구 4명에게 화장품 패키지에 점자 표기가 필요한지 물어보았다.”</p>
+      </div>
+
+      <div class="card">
+        <h2>3. 활동 결과와 새롭게 알게 된 점</h2>
+        <label for="practiceResult">실제로 해 보니 어떤 결과가 나타났는가?</label>
+        <textarea id="practiceResult" name="practiceResult" placeholder="조사 결과, 설문 결과, 직접 제작한 결과물, 관찰한 변화 등을 구체적으로 적으세요."></textarea>
+        <label for="newFinding">새롭게 알게 된 점</label>
+        <textarea id="newFinding" name="newFinding" placeholder="처음 생각과 달랐던 점, 새로 알게 된 사회문제의 구조, 사람들의 반응 등을 적으세요."></textarea>
+      </div>
+
+      <div class="card">
+        <h2>4. 어려웠던 점 또는 한계</h2>
+        <div class="guide">실패나 한계가 있어도 괜찮습니다. 사회혁신은 실행 과정에서 문제를 발견하고 수정하는 과정입니다.</div>
+        <label for="difficulty">실천 과정에서 어려웠던 점 또는 한계</label>
+        <textarea id="difficulty" name="difficulty" class="long" placeholder="예: 참여자를 모으기 어려웠다 / 자료가 부족했다 / 비용이 많이 들었다 / 실제 적용하려면 허가가 필요했다 / 예상보다 사람들의 관심이 낮았다 등"></textarea>
+      </div>
+
+      <div class="card">
+        <h2>5. 다시 한다면 수정하고 싶은 점</h2>
+        <label for="revisionPlan">이번 활동을 다시 진행한다면 어떤 점을 수정하거나 보완하고 싶은가?</label>
+        <textarea id="revisionPlan" name="revisionPlan" class="long" placeholder="대상, 방법, 질문, 홍보 방식, 실험 절차, 조사 자료, 디자인 등을 어떻게 바꿀지 적으세요."></textarea>
+      </div>
+
+      <div class="card">
+        <h2>6. 기대 효과</h2>
+        <p class="section-note">이 활동이 더 많은 사람에게 확대된다면 어떤 긍정적인 효과가 있을지 적어보세요.</p>
+        <label for="effectIndividual">개인에게 기대되는 효과</label>
+        <textarea id="effectIndividual" name="effectIndividual" placeholder="예: 불편 감소, 인식 변화, 안전 확보, 자기관리 능력 향상 등"></textarea>
+        <label for="effectCommunity">학교 또는 지역사회에 기대되는 효과</label>
+        <textarea id="effectCommunity" name="effectCommunity" placeholder="예: 학교 문화 개선, 지역사회 참여 증가, 캠페인 확산, 공동체 의식 향상 등"></textarea>
+        <label for="effectSociety">사회 전체에 기대되는 효과</label>
+        <textarea id="effectSociety" name="effectSociety" placeholder="예: 제도 개선 필요성 환기, 사회적 약자 접근성 향상, 지속가능한 소비문화 형성 등"></textarea>
+      </div>
+
+      <div class="card">
+        <h2>7. 성찰</h2>
+        <label for="growthCompetency">이번 활동을 통해 내가 가장 크게 성장했다고 느끼는 역량</label>
+        <textarea id="growthCompetency" name="growthCompetency" placeholder="예: 문제 발견 능력, 실행력, 자료 조사 능력, 공감 능력, 설문 설계 능력, 디자인 사고, 비판적 사고 등"></textarea>
+        <label for="careerConnection">이번 활동이 나의 진로나 관심 분야와 어떤 관련이 있다고 생각하는가?</label>
+        <textarea id="careerConnection" name="careerConnection" class="long" placeholder="나의 진로, 관심 분야, 앞으로 더 탐구해 보고 싶은 방향과 연결해서 적으세요."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">제출하기</button>
+      <button type="button" class="secondary-btn" onclick="clearSavedData()">임시저장 내용 삭제하기</button>
+      <div class="save-status" id="saveStatus">작성 내용 자동 저장 중</div>
+    </form>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "여기에_구글_앱스스크립트_웹앱_URL을_넣으세요";
+    const STORAGE_KEY = "social_innovation_practice_report_v1";
+
+    const form = document.getElementById("worksheetForm");
+    const saveStatus = document.getElementById("saveStatus");
+
+    function getFormData() {
+      const data = {};
+      form.querySelectorAll("input, textarea").forEach(field => {
+        data[field.name] = field.value;
+      });
+      data.action = "practice_report";
+      return data;
+    }
+
+    function saveToLocalStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(getFormData()));
+      saveStatus.textContent = "임시저장 완료";
+      setTimeout(() => {
+        saveStatus.textContent = "작성 내용 자동 저장 중";
+      }, 1200);
+    }
+
+    function loadFromLocalStorage() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const field = form.querySelector(`[name="${key}"]`);
+        if (field) field.value = data[key];
+      });
+    }
+
+    function clearSavedData() {
+      if (!confirm("현재 브라우저에 임시저장된 내용을 삭제할까요?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      form.reset();
+      saveStatus.textContent = "임시저장 내용이 삭제되었습니다.";
+    }
+
+    form.addEventListener("input", saveToLocalStorage);
+    form.addEventListener("change", saveToLocalStorage);
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      if (SCRIPT_URL.includes("여기에_구글")) {
+        alert("미리보기 상태입니다. Apps Script URL을 넣으면 실제 제출이 가능합니다.");
+        return;
+      }
+
+      const data = getFormData();
+
+      if (!data.studentId.trim() || !data.name.trim()) {
+        alert("학번과 이름을 입력하세요.");
+        return;
+      }
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(data)
+        });
+        alert("제출되었습니다. 수고했습니다!");
+      } catch (error) {
+        alert("제출 중 오류가 발생했습니다. 인터넷 연결을 확인하거나 선생님께 알려주세요.");
+      }
+    });
+
+    loadFromLocalStorage();
+  </script>
+</body>
+</html>
